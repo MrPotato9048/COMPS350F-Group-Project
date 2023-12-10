@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+
+  <head>
+    <script src="/static/jslib/color-modes.js"></script>
+    <script src="/static/jslib/jquery-1.11.1.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content>
+    <meta name="author"
+      content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.118.2">
+    <title>Student Record System - Course Group Edit</title>
+
+    <link rel="canonical"
+      href="https://getbootstrap.com/docs/5.3/examples/sidebars/">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+
+    .b-example-divider {
+      width: 100%;
+      height: 3rem;
+      background-color: rgba(0, 0, 0, .1);
+      border: solid rgba(0, 0, 0, .15);
+      border-width: 1px 0;
+      box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+    }
+
+    .b-example-vr {
+      flex-shrink: 0;
+      width: 1.5rem;
+      height: 100vh;
+    }
+
+    .bi {
+      vertical-align: -.125em;
+      fill: currentColor;
+    }
+
+    .nav-scroller {
+      position: relative;
+      z-index: 2;
+      height: 2.75rem;
+      overflow-y: hidden;
+    }
+
+    .nav-scroller .nav {
+      display: flex;
+      flex-wrap: nowrap;
+      padding-bottom: 1rem;
+      margin-top: -1px;
+      overflow-x: auto;
+      text-align: center;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .btn-bd-primary {
+      --bd-violet-bg: #712cf9;
+      --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+
+      --bs-btn-font-weight: 600;
+      --bs-btn-color: var(--bs-white);
+      --bs-btn-bg: var(--bd-violet-bg);
+      --bs-btn-border-color: var(--bd-violet-bg);
+      --bs-btn-hover-color: var(--bs-white);
+      --bs-btn-hover-bg: #6528e0;
+      --bs-btn-hover-border-color: #6528e0;
+      --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+      --bs-btn-active-color: var(--bs-btn-hover-color);
+      --bs-btn-active-bg: #5a23c8;
+      --bs-btn-active-border-color: #5a23c8;
+    }
+
+    .bd-mode-toggle {
+      z-index: 1500;
+    }
+
+    .bd-mode-toggle .dropdown-menu .active .bi {
+      display: flex !important;
+    }
+  </style>
+
+    <!-- Custom styles for this template -->
+    <link href="/static/css/sidebars.css" rel="stylesheet">
+    <link href="/static/css/layout.css" rel="stylesheet">
+    <script src="/static/jslib/navbar_adm.js"></script>
+    <style>
+    table{
+        border:1px solid flex;
+    }
+  </style>
+  </head>
+  <body>
+    <div id="body">
+      <div id="navbar"></div>
+      <div id="sidebar"></div>
+      <div id="note" style="float:left;">
+        <div style="background-color: #9EDAE3;min-width: 500px; min-height: 300px;">
+          <dialog id="msgDialog">
+            <button onclick="DialogClose()" style="float: right;" class="btn3">X</button>
+            <table class="acad" id="add" style="display: none;">
+              <tr><td>Student ID</td><td>StudentName</td><td></td></tr>
+            </table>
+            <button onclick="Insert()" class="btn">Confirm</button><button
+              onclick="DialogClose()" class="btn">Cancel</button>
+            <table class="acad" id="list">
+              <tr><td>Student ID</td><td>StudentName</td></tr>
+              {% set x = namespace(count=0) %}
+              {% for item in cour_stu %}
+              <tr onclick="Hidden(this)"><td>{{item[0]}}</td><td>{{item[1]}}</td><td><button class="btn">Add</button></td></tr>
+              {% set x.count = x.count + 1 %}
+              {% endfor %}
+            </table>
+          </dialog>
+          <table>
+            <tr><td>Course Code</td><td class="colon">:</td><td>{{code}}</td></tr>
+            <tr><td>Course</td><td class="colon">:</td><td>{{course_name}}</td></tr>
+            <tr><td>No. of Student(s)</td><td class="colon">:</td><td>{{stu_num}}</td></tr>
+            <tr><td colspan="3"><button onclick="Change()" id="btn_m" class="btn2">Modify
+                  Student List</button><button class="btn2" id="btn_r"><a href="/course_group_adm">Page
+                  Back</a></button><button class="btn2" id="btn_add" onclick="DialogOpen()"
+                  style="display: none;float: left;">Add New Student</button>
+                <button class="btn2" id="btn_up" onclick="Submit()"
+                  style="display: none;float: left;">Update</button><button
+                  id="btn_cl" onclick="Cancel()"
+                  style="display: none;float: left;" class="btn2" >Cancel</button></td></tr>
+          </table>
+          <form action="/course_group_r_adm" method="POST">
+            <input type="text" name="add_stu" id="add_stu"
+              style="display: none;" />
+            <input type="text" name="del_stu" id="del_stu"
+              style="display: none;" />
+            <input type="text" name="code" id="code" value="{{code}}"
+              style="display: none;" />
+            <button type="submit" id="btn_s" style="display: none;"></button>
+          </form>
+          <div id="div_add"
+            style="float: left;border: 1px solid black;display: none;">
+            <h6>New Student List</h6>
+            <div id="add_list">
+              <table class="acad" id="add_table" style="display: none;">
+                <tr style="display: none;"><td>Student ID</td><td>Student Name</td><td></td></tr></table>
+            </div>
+          </div>
+          <div id="div_del"
+            style="float: left;border: 1px solid black;display: none;margin-left: 20px;">
+            <h6>Remove Student List</h6>
+            <div id="del_list">
+              <table class="acad" id="del_table">
+                <tr style="display: none;"><td>Student ID</td><td>Student Name</td><td></td></tr>
+              </table>
+            </div>
+          </div>
+          <div>
+          <table class="acad" id="cur_stu" style="display: none;">
+            <tr><td colspan="3">Student List of the student:</td></tr>
+            <tr><td>Student ID</td><td>Student Name</td><td>Action</td></tr>
+            {% set x = namespace(count=0) %}
+            {% for item in gup_stu %}
+            <tr onclick="Remove(this)"><td>{{item[0]}}</td><td>{{item[1]}}</td><td><button class="btn2">Remove</button></td></tr>
+            {% set x.count = x.count + 1 %}
+            {% endfor %}
+          </table>
+          <table class="acad2" id="cur_stu2">
+            <tr><td colspan="3">Student List of the student:</td></tr>
+            <tr><td>Student ID</td><td>Student Name</td></tr>
+            {% set x = namespace(count=0) %}
+            {% for item in gup_stu %}
+            <tr onclick="Remove(this)"><td>{{item[0]}}</td><td>{{item[1]}}</td></tr>
+            {% set x.count = x.count + 1 %}
+            {% endfor %}
+          </table>
+        </div>
+        </div>
+      </div>
+    </div>
+    <script src="/static/jslib/bootstrap.bundle.min.js"></script>
+    <script src="/static/jslib/sidebars.js"></script>
+    <script>
+      const temp = [];
+      function Hidden(x){
+        document.getElementById("add").style.display = "block";
+        var table = document.getElementById("list");
+        var table2 = document.getElementById("add");
+        table.getElementsByTagName("tr")[x.rowIndex].style.display = 'none';
+        var len = table2.rows.length;
+        var row = table2.insertRow(len);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        var cell4 = row.insertCell(3);
+        cell1.innerHTML = document.getElementById('list').rows[x.rowIndex].cells[0].innerHTML;
+        cell2.innerHTML = document.getElementById('list').rows[x.rowIndex].cells[1].innerHTML;
+        cell3.innerHTML = "<button class='btn2' onclick=Move("+x.rowIndex+","+len+")>X</button>";
+        temp.push(x.rowIndex);
+      }
+      function Move(r,r2){
+        var table = document.getElementById("list");
+        table.getElementsByTagName("tr")[r].style.display = '';
+        var table2 = document.getElementById("add");
+        table2.getElementsByTagName("tr")[r2].style.display = 'none';
+      }
+      function Move2(r,r2){
+        var table = document.getElementById("list");
+        table.getElementsByTagName("tr")[r].style.display = '';
+        var table2 = document.getElementById("add_table");
+        table2.getElementsByTagName("tr")[r2].style.display = 'none';
+      }
+      function Move3(r,r2){
+        var table = document.getElementById("cur_stu");
+        table.getElementsByTagName("tr")[r].style.display = '';
+        var table2 = document.getElementById("del_table");
+        table2.getElementsByTagName("tr")[r2].style.display = 'none';
+      }
+      function Remove(r){
+        var table = document.getElementById("cur_stu");
+        table.getElementsByTagName("tr")[r.rowIndex].style.display = 'none';
+        var table2 = document.getElementById("del_table");
+        table2.getElementsByTagName("tr")[0].style.display = '';
+        var len = table2.rows.length;
+        var row = table2.insertRow(len);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        cell1.innerHTML = document.getElementById('cur_stu').rows[r.rowIndex].cells[0].innerHTML;
+        cell2.innerHTML = document.getElementById('cur_stu').rows[r.rowIndex].cells[1].innerHTML;
+        cell3.innerHTML = "<button class='btn2' onclick=Move3("+r.rowIndex+","+len+")>X</button>";
+      }
+      function Table(){
+        var grid = document.getElementById("add");
+        var rows = document.getElementById('add').rows.length;
+        var columns = document.getElementById('add').rows[0].cells.length;
+        var msg = "";
+          for(i=0; i < rows; i++){
+            //msg += document.getElementById('add').rows[i].cells[0].innerHTML+"</td>";
+            msg += document.getElementById('add').rows[i].cells[0].innerHTML
+            for(y=0;y<columns;y++){
+              var value = document.getElementById('add').rows[i].cells[y];
+              msg += value;
+            }
+            msg += "\n";
+          }
+      }
+      function Change(){
+        document.getElementById("btn_m").style.display = 'none';
+        document.getElementById("btn_r").style.display = 'none';
+        document.getElementById("cur_stu2").style.display = "none";
+        document.getElementById("btn_add").style.display = "";
+        document.getElementById("btn_up").style.display = "";
+        document.getElementById("btn_cl").style.display = "";
+        document.getElementById("div_add").style.display = "";
+        document.getElementById("div_del").style.display = "";
+        document.getElementById("cur_stu").style.display = "";
+      }
+      
+      function Cancel(){
+        document.getElementById("btn_m").style.display = '';
+        document.getElementById("btn_r").style.display = '';
+        document.getElementById("cur_stu2").style.display = "";
+        document.getElementById("btn_add").style.display = 'none';
+        document.getElementById("btn_up").style.display = 'none';
+        document.getElementById("btn_cl").style.display = 'none';
+        document.getElementById("div_add").style.display = 'none';
+        document.getElementById("div_del").style.display = 'none';
+        document.getElementById("cur_stu").style.display = "none";
+      }
+      function DialogOpen(){
+        document.getElementById("msgDialog").open = true;
+      }
+      function DialogClose(){
+        var table = document.getElementById("add");
+        var table2 = document.getElementById("list");
+        var r = table.rows.length;
+        var r2 = table2.rows.length;
+          for(let i=1;i<r;i++){
+            table.getElementsByTagName("tr")[i].style.display = 'none';
+          }
+          for(let y=1;y<r2;y++){
+            table2.getElementsByTagName("tr")[y].style.display = '';
+          }
+        document.getElementById("msgDialog").open = false;
+      }
+      function Insert(){
+        document.getElementById("msgDialog").open = false;
+        var table = document.getElementById("add");
+        var rows = table.rows.length;
+        var table2 = document.getElementById("add_table");
+        table2.style.display = "";
+        table2.getElementsByTagName("tr")[0].style.display = '';
+        var rows = table.rows.length;
+        if(rows > 1){
+          for(let i=1;i<rows;i++){
+            if(table.getElementsByTagName("tr")[i].style.display != "none"){
+              var len = table2.rows.length;
+              var row = table2.insertRow(len);
+              var cell1 = row.insertCell(0);
+              var cell2 = row.insertCell(1);
+              var cell3 = row.insertCell(2);
+              var l_r = temp[i-1];
+              cell1.innerHTML = document.getElementById('add').rows[i].cells[0].innerHTML;
+              cell2.innerHTML = document.getElementById('add').rows[i].cells[1].innerHTML;
+              cell3.innerHTML = "<button class='btn' onclick=Move2("+l_r+","+len+")>X</button>";
+            }
+          }
+          for(let i=rows;i>1;i--){
+            table.deleteRow(1);
+          }
+        }
+        table.style.display="none";
+      }
+      function Submit(){
+        var table = document.getElementById('add_table');
+        var table2 = document.getElementById('del_table');
+        var r1 = table.rows.length;
+        var r2 = table2.rows.length;
+        var str = "";
+        var str2 = "";
+        if(r1>0){
+          for(let i=0;i<r1;i++){
+            str+=document.getElementById('add_table').rows[i].cells[0].innerHTML+";"
+          }
+        }else{
+          str = "";
+        }
+        if(r2>0){
+          for(let i=0;i<r2;i++){
+            str2+=document.getElementById('del_table').rows[i].cells[0].innerHTML+";"
+          }
+        }else{
+          str2 = "";
+        }
+        // Set the values of the hidden input fields
+        document.getElementById('add_stu').value = str;
+        document.getElementById('del_stu').value = str2;
+        // Submit the form
+        document.getElementById("btn_s").click();
+      }
+    </script>
+    <script>
+      var offsetHeight = document.getElementById('content').offsetHeight;
+      var new_height = offsetHeight+20;
+      document.getElementById('content').style.height= new_height+"px";
+    </script>
+  </body>
+
+</html>

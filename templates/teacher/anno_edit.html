@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+
+  <head>
+    <script src="../../static/jslib/color-modes.js"></script>
+    <script src="../../static/jslib/jquery-1.11.1.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content>
+    <meta name="author"
+      content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.118.2">
+    <title>Student Record System - New Announcement</title>
+
+    <link rel="canonical"
+      href="https://getbootstrap.com/docs/5.3/examples/sidebars/">
+    <link rel="canonical"
+      href="https://getbootstrap.com/docs/5.3/examples/pricing/">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+
+    <link href="../../static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/layout.css" rel="stylesheet">
+    <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+
+    .b-example-divider {
+      width: 100%;
+      height: 3rm;
+      background-color: rgba(0, 0, 0, .1);
+      border: solid rgba(0, 0, 0, .15);
+      border-width: 1px 0;
+      box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+    }
+
+    .b-example-vr {
+      flex-shrink: 0;
+      width: 1.5rem;
+      height: 100vh;
+    }
+
+    .bi {
+      vertical-align: -.125em;
+      fill: currentColor;
+    }
+
+    .nav-scroller {
+      position: relative;
+      z-index: 2;
+      height: 2.75rem;
+      overflow-y: hidden;
+    }
+
+    .nav-scroller .nav {
+      display: flex;
+      flex-wrap: nowrap;
+      padding-bottom: 1rem;
+      margin-top: -1px;
+      overflow-x: auto;
+      text-align: center;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .btn-bd-primary {
+      --bd-violet-bg: #712cf9;
+      --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+
+      --bs-btn-font-weight: 600;
+      --bs-btn-color: var(--bs-white);
+      --bs-btn-bg: var(--bd-violet-bg);
+      --bs-btn-border-color: var(--bd-violet-bg);
+      --bs-btn-hover-color: var(--bs-white);
+      --bs-btn-hover-bg: #6528e0;
+      --bs-btn-hover-border-color: #6528e0;
+      --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+      --bs-btn-active-color: var(--bs-btn-hover-color);
+      --bs-btn-active-bg: #5a23c8;
+      --bs-btn-active-border-color: #5a23c8;
+    }
+
+    .bd-mode-toggle {
+      z-index: 1500;
+    }
+
+    .bd-mode-toggle .dropdown-menu .active .bi {
+      display: block !important;
+    }
+  </style>
+
+    <!-- Custom styles for this template -->
+    <link href="../../static/css/sidebars.css" rel="stylesheet">
+    <link href="../../static/css/pricing.css" rel="stylesheet">
+    <link href="../../static/css/layout.css" rel="stylesheet">
+    <script src="/static/jslib/navbar_tc.js"></script>
+  </head>
+
+  <body>
+    <div id="body">
+      <div id="navbar"></div>
+      <div id="sidebar"></div>
+      <div id="content">
+        <div id="note">
+          <div class="item" style="text-align: center; width:600px;">
+            <div class="card mb-4 rounded-3 shadow-sm">
+              <div class="card-header py-3">
+                <h4 class="my-0 fw-normal">Add New Announcement</h4>
+              </div>
+              <div class="card-body" style="margin: auto;">
+                <form action="/insert_anno" method="POST" id="anno">
+                  <table>
+                    <tr><td>Title</td><td>:</td><td><input type="text"
+                          name="title" id="title"></td></tr>
+                    <tr><td>Date</td><td>:</td><td>{{date}}</td></tr>
+                    <tr><td>Publisher</td><td>:</td><td>{{name}}</td></tr>
+                    <tr><td>Target</td><td>:</td><td><select
+                          form="anno" name="target" id="target" style="width:200px">
+                          {% set x = namespace(count=0) %}
+                          {% for item in data %}
+                          <option value="{{item}}">{{item}}</option>
+                          {% set x.count = x.count + 1 %}
+                          {% endfor %}
+                        </select></td></tr>
+                    <tr><td>Content</td><td colspan="2"
+                        style="width:1%;text-align: left;">:</td></tr>
+                    <tr><td colspan="3">
+                        <textarea cols="30" rows="4" name="text" id="text" form="anno" style="resize: none" placeholder="Please insert the announcement content"></textarea></td></tr>
+                    <tr><td colspan="3"><button type="reset" class="btn">Reset</button>
+                        <button style="margin-left: 10px;" type="submit" class="btn">Post</button>
+                        <button style="margin-left: 10px;" class="btn"><a href="/note_tc">Cancel</a></button></td></tr>
+                  </table>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="../../static/jslib/bootstrap.bundle.min.js"></script>
+  </body>
+
+</html>

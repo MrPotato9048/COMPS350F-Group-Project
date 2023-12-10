@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+
+  <head>
+    <script src="/static/jslib/color-modes.js"></script>
+    <script src="/static/jslib/jquery-1.11.1.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content>
+    <meta name="author"
+      content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.118.2">
+    <title>Student Record System - Announcements</title>
+
+    <link rel="canonical"
+      href="https://getbootstrap.com/docs/5.3/examples/sidebars/">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+
+    .b-example-divider {
+      width: 100%;
+      height: 3rem;
+      background-color: rgba(0, 0, 0, .1);
+      border: solid rgba(0, 0, 0, .15);
+      border-width: 1px 0;
+      box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+    }
+
+    .b-example-vr {
+      flex-shrink: 0;
+      width: 1.5rem;
+      height: 100vh;
+    }
+
+    .bi {
+      vertical-align: -.125em;
+      fill: currentColor;
+    }
+
+    .nav-scroller {
+      position: relative;
+      z-index: 2;
+      height: 2.75rem;
+      overflow-y: hidden;
+    }
+
+    .nav-scroller .nav {
+      display: flex;
+      flex-wrap: nowrap;
+      padding-bottom: 1rem;
+      margin-top: -1px;
+      overflow-x: auto;
+      text-align: center;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .btn-bd-primary {
+      --bd-violet-bg: #712cf9;
+      --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+
+      --bs-btn-font-weight: 600;
+      --bs-btn-color: var(--bs-white);
+      --bs-btn-bg: var(--bd-violet-bg);
+      --bs-btn-border-color: var(--bd-violet-bg);
+      --bs-btn-hover-color: var(--bs-white);
+      --bs-btn-hover-bg: #6528e0;
+      --bs-btn-hover-border-color: #6528e0;
+      --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+      --bs-btn-active-color: var(--bs-btn-hover-color);
+      --bs-btn-active-bg: #5a23c8;
+      --bs-btn-active-border-color: #5a23c8;
+    }
+
+    .bd-mode-toggle {
+      z-index: 1500;
+    }
+
+    .bd-mode-toggle .dropdown-menu .active .bi {
+      display: block !important;
+    }
+  </style>
+
+    <!-- Custom styles for this template -->
+    <link href="/static/css/sidebars.css" rel="stylesheet">
+    <link href="/static/css/layout.css" rel="stylesheet">
+    <script src="/static/jslib/navbar_stu.js"></script>
+  </head>
+
+  <body>
+    <div id="body">
+      <div id="navbar"></div>
+      <div id="sidebar"></div>
+      <div id="note" style="float:left;">
+        <div id="index"></div>
+        <dialog id="msgDialog"></dialog>
+        <div class="item"
+          style="text-align: center; width:300px;float: left;padding-left: 10px;">
+          <div class="card mb-4 rounded-3 shadow-sm">
+            <div class="card-header py-3">
+              <h4 class="my-0 fw-normal">Term Announcement</h4>
+            </div>
+            <div class="card-body">
+              <table class="note">
+                {% set x = namespace(count=0) %}
+                {% for item in term_msg %}
+                <tr>
+                  <td class="tt"><button class="btn3"
+                      name="course" id="course"
+                      value="{{item.noteTitle}}">{{item.noteTitle}}</button></td>
+                  <td class="date">{{item.date}}</td>
+                  <td style="display:none;" class="publisher">{{item.publisher}}</td>
+                  <td style="display:none;" class="target">{{item.target}}</td>
+                  <td class="msg" style="display:none;">{{item.note}}</td>
+                </tr>
+                {% set x.count = x.count + 1 %}
+                {% endfor %}
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="item"
+          style="text-align: center; width:300px;padding-left: 10px;">
+          <div class="card mb-4 rounded-3 shadow-sm">
+            <div class="card-header py-3">
+              <h4 class="my-0 fw-normal">School Announcement</h4>
+            </div>
+            <div class="card-body">
+              <table class="note">
+                {% set x = namespace(count=0) %}
+                {% for item in school_msg %}
+                <tr>
+                  <td class="tt"><button class="btn3"
+                      name="course" id="course"
+                      value="{{item.noteTitle}}">{{item.noteTitle}}</button></td>
+                  <td class="date">{{item.date}}</td>
+                  <td style="display:none;" class="publisher">{{item.publisher}}</td>
+                  <td style="display:none;" class="target">{{item.target}}</td>
+                  <td class="msg" style="display:none;">{{item.note}}</td>
+                </tr>
+                {% set x.count = x.count + 1 %}
+                {% endfor %}
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/static/jslib/bootstrap.bundle.min.js"></script>
+    <script src="/static/jslib/sidebars.js"></script>
+    <script>
+    var w = window.innerWidth;
+    const dialog = document.getElementById("msgDialog");
+    $("#index").height(99999);
+    $("#index").width(99999);
+    $(".tt").click(function (){
+      var $row = $(this).closest("tr"); // Find the row
+      var $publisher = $row.find(".publisher").text(); // Find the text
+      var $title = $row.find(".tt").text(); // Find the text
+      var $date = $row.find(".date").text(); // Find the text
+      var $target = $row.find(".target").text(); // Find the text
+      var $msg = $row.find(".msg").text(); // Find the text
+      // Let's test it out
+      var text = "<button style='float:right' onclick='DialogClose()'>X</button><br />";
+      text += "<label>" + $target + ":</label><br />";
+      text += "<p style='margin:auto;text-align:justify;'>   " + $msg + "</p><br />";
+      text += "<label style='float:right'>" + $publisher + "</label><br />";
+      text += "<label style='float:right'>" + $date + "</label><br />";
+      dialog.innerHTML = text;
+      dialog.open = true;
+      $('#index').css("display","block");
+    });
+
+    function DialogClose() {
+      document.getElementById("msgDialog").open = false;
+      $('#index').css("display","none");
+    }
+  </script>
+  </body>
+
+</html>

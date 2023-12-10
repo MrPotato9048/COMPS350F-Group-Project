@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+
+  <head>
+    <script src="/static/jslib/color-modes.js"></script>
+    <script src="/static/jslib/jquery-1.11.1.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content>
+    <meta name="author"
+      content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.118.2">
+    <title>Student Record System - Profile Edit</title>
+
+    <link rel="canonical"
+      href="https://getbootstrap.com/docs/5.3/examples/sidebars/">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+
+    .b-example-divider {
+      width: 100%;
+      height: 3rem;
+      background-color: rgba(0, 0, 0, .1);
+      border: solid rgba(0, 0, 0, .15);
+      border-width: 1px 0;
+      box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+    }
+
+    .b-example-vr {
+      flex-shrink: 0;
+      width: 1.5rem;
+      height: 100vh;
+    }
+
+    .bi {
+      vertical-align: -.125em;
+      fill: currentColor;
+    }
+
+    .nav-scroller {
+      position: relative;
+      z-index: 2;
+      height: 2.75rem;
+      overflow-y: hidden;
+    }
+
+    .nav-scroller .nav {
+      display: flex;
+      flex-wrap: nowrap;
+      padding-bottom: 1rem;
+      margin-top: -1px;
+      overflow-x: auto;
+      text-align: center;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .btn-bd-primary {
+      --bd-violet-bg: #712cf9;
+      --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+
+      --bs-btn-font-weight: 600;
+      --bs-btn-color: var(--bs-white);
+      --bs-btn-bg: var(--bd-violet-bg);
+      --bs-btn-border-color: var(--bd-violet-bg);
+      --bs-btn-hover-color: var(--bs-white);
+      --bs-btn-hover-bg: #6528e0;
+      --bs-btn-hover-border-color: #6528e0;
+      --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+      --bs-btn-active-color: var(--bs-btn-hover-color);
+      --bs-btn-active-bg: #5a23c8;
+      --bs-btn-active-border-color: #5a23c8;
+    }
+
+    .bd-mode-toggle {
+      z-index: 1500;
+    }
+
+    .bd-mode-toggle .dropdown-menu .active .bi {
+      display: block !important;
+    }
+  </style>
+
+    <!-- Custom styles for this template -->
+    <link href="/static/css/sidebars.css" rel="stylesheet">
+    <link href="/static/css/layout.css" rel="stylesheet">
+    <script src="/static/jslib/navbar_stu.js"></script>
+  </head>
+
+  <body>
+    <div id="navbar"></div>
+    <div id="sidebar"></div>
+    <div class="center" style="float:left;background-color: #d3d3d3;height: 375px;border:3px solid #d3d3d3; border-style: outset;">
+        <form action="/PD_Edit" method="POST">
+          <input type="text" id="stu_id" name="stu_id" style="display: none;" value="{{stu_id}}"/>
+          <table class="table table-bordered table-striped">
+            <tr>
+              <td colspan="3"><h4>Personal Information</h4></td>
+            </tr>
+            <tr>
+              <td>Student No</td>
+              <td class="colon">:</td>
+              <td><label id="std_id">{{std_id}}</label></td>
+            </tr>
+            <tr>
+              <td>Student Name</td>
+              <td class="colon">:</td>
+              <td><input type="text" value="{{std_name}}" name="std_name"
+                  id="std_name" pattern="[A-Za-z\s]+" style="width: 100%;" /></td>
+            </tr>
+            <tr>
+              <td>Gender</td>
+              <td class="colon">:</td>
+              <td><label id="gender">{{gender}}</label></td>
+            </tr>
+            <tr>
+              <td>Contact Number</td>
+              <td class="colon">:</td>
+              <td><input type="text" value="{{phone}}" name="phone" id="phone"
+                  pattern="[0-9]{8}" size="8" style="width: 100%;" /></td>
+            </tr>
+            <tr>
+              <td>Studying Subject</td>
+              <td class="colon">:</td>
+              <td><label>{% for course in subject %}
+                ({{course.courseCode}}) {{course.courseName}}<br>
+              {% endfor %}</label></td>
+            </tr>
+            <tr>
+              <td>Studying Year</td>
+              <td class="colon">:</td>
+              <td><label>{{year}}</label></td>
+            </tr>
+            <tr>
+              <td id="btn" colspan="3"><button style="margin-left: 30px;" type="submit" value="Modify"
+                  class="btn">Edit
+                  Details</button><button style="margin-left: 30px;" value="Cancel" class="btn" onclick="history.back()">Cancel</button></td>
+            </tr>
+          </table>
+        </form>
+      </div>
+      </div>
+    </div>
+    <script src="/static/jslib/bootstrap.bundle.min.js"></script>
+    <script src="/static/jslib/sidebars.js"></script>
+  </body>
+
+</html>

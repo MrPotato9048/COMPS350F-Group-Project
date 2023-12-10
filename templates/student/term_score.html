@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+
+  <head>
+    <script src="../../static/jslib/color-modes.js"></script>
+    <script src="../../static/jslib/jquery-1.11.1.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content>
+    <meta name="author"
+      content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.118.2">
+    <title>Teem Score</title>
+
+    <link rel="canonical"
+      href="https://getbootstrap.com/docs/5.3/examples/sidebars/">
+    <link rel="canonical"
+      href="https://getbootstrap.com/docs/5.3/examples/pricing/">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+
+    <link href="../../static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../static/css/layout.css" rel="stylesheet">
+    <link href="../../static/css/t_s_p.css" rel="stylesheet">
+    <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+
+    .b-example-divider {
+      width: 100%;
+      height: 3rm;
+      background-color: rgba(0, 0, 0, .1);
+      border: solid rgba(0, 0, 0, .15);
+      border-width: 1px 0;
+      box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+    }
+
+    .b-example-vr {
+      flex-shrink: 0;
+      width: 1.5rem;
+      height: 100vh;
+    }
+
+    .bi {
+      vertical-align: -.125em;
+      fill: currentColor;
+    }
+
+    .nav-scroller {
+      position: relative;
+      z-index: 2;
+      height: 2.75rem;
+      overflow-y: hidden;
+    }
+
+    .nav-scroller .nav {
+      display: flex;
+      flex-wrap: nowrap;
+      padding-bottom: 1rem;
+      margin-top: -1px;
+      overflow-x: auto;
+      text-align: center;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .btn-bd-primary {
+      --bd-violet-bg: #712cf9;
+      --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+
+      --bs-btn-font-weight: 600;
+      --bs-btn-color: var(--bs-white);
+      --bs-btn-bg: var(--bd-violet-bg);
+      --bs-btn-border-color: var(--bd-violet-bg);
+      --bs-btn-hover-color: var(--bs-white);
+      --bs-btn-hover-bg: #6528e0;
+      --bs-btn-hover-border-color: #6528e0;
+      --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+      --bs-btn-active-color: var(--bs-btn-hover-color);
+      --bs-btn-active-bg: #5a23c8;
+      --bs-btn-active-border-color: #5a23c8;
+    }
+
+    .bd-mode-toggle {
+      z-index: 1500;
+    }
+
+    .bd-mode-toggle .dropdown-menu .active .bi {
+      display: block !important;
+    }
+  </style>
+
+    <!-- Custom styles for this template -->
+    <link href="../../static/css/sidebars.css" rel="stylesheet">
+    <link href="../../static/css/pricing.css" rel="stylesheet">
+    <link href="../../static/css/layout.css" rel="stylesheet">
+    <script src="/static/jslib/navbar_stu.js"></script>
+  </head>
+
+  <body>
+    <div id="body">
+      <div id="navbar"></div>
+      <div id="sidebar"></div>
+      <div id="content"
+        style="background-color: #9EDAE3;width: 900px;height: 500px;">
+        <div class="center">
+          <table style="border-bottom: 2px solid black; width: 600px;">
+            <tr><th>Term Summary</th></tr>
+          </table>
+          <table style="border:1px solid black;">
+            <tr><td class="sd">Student No</td><td class="colon">:</td><td>{{stu_id}}</td></tr>
+            <tr><td class="sd">Student Name</td><td class="colon">:</td><td>{{stu_name}}</td></tr>
+            <tr><td class="sd">Career</td><td class="colon">:</td><td>{{Career}}</td></tr>
+            <tr><td class="sd">Career Subject</td><td class="colon">:</td><td>{{subject}}</td></tr>
+          </table>
+          <br />
+          <table>
+            <tr><td>Term</td><td>:</td><td>
+                <select name="term" id="term">
+                  {% set x = namespace(count=0) %}
+                  {% for item in data %}
+                  <option value="{{item[0]}}">{{item[0]}}</option>
+                  {% set x.count = x.count + 1 %}
+                  {% endfor %}
+                </select>
+              </td></tr>
+          </table>
+          <br />
+          <table class="acad">
+            <thead>
+              <tr><td>Course Code</td><td>description</td><td>Unit</td><td>Grade</td></tr>
+            </thead>
+            <tbody>
+              <tr><td>{{code}}</td><td>{{description}}</td><td>{{unit}}</td><td>{{grade}}</td></tr>
+            </tbody>
+          </table>
+          <hr />
+          <table class="acad">
+            <tr><td colspan="6">Statistics </td></tr>
+            <tr><td id="gpa">Term GPA</td><td class="colon">:</td><td>{{gpa}}</td><td
+                id="cgpa">Term cGPA</td><td class="colon">:</td><td>{{cgpa}}</td></tr>
+            <tr><td colspan="6" style="white-space: nowrap;">Note: Term GPA and
+                Term cGPA information are refreshed every 3 hours</td></tr>
+            <tr><td colspan="6">{{date}}</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <script src="../../static/jslib/bootstrap.bundle.min.js"></script>
+
+  </body>
+
+</html>

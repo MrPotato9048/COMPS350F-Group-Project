@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+
+  <head>
+    <script src="../../static/jslib/color-modes.js"></script>
+    <script src="../../static/jslib/jquery-1.11.1.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content>
+    <meta name="author"
+      content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.118.2">
+    <title>Student Record System - Course Edit</title>
+
+    <link rel="canonical"
+      href="https://getbootstrap.com/docs/5.3/examples/sidebars/">
+    <link rel="canonical"
+      href="https://getbootstrap.com/docs/5.3/examples/pricing/">
+
+    <link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+
+    <link href="../../static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../static/css/layout.css" rel="stylesheet">
+    <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+
+    .b-example-divider {
+      width: 100%;
+      height: 3rm;
+      background-color: rgba(0, 0, 0, .1);
+      border: solid rgba(0, 0, 0, .15);
+      border-width: 1px 0;
+      box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+    }
+
+    .b-example-vr {
+      flex-shrink: 0;
+      width: 1.5rem;
+      height: 100vh;
+    }
+
+    .bi {
+      vertical-align: -.125em;
+      fill: currentColor;
+    }
+
+    .nav-scroller {
+      position: relative;
+      z-index: 2;
+      height: 2.75rem;
+      overflow-y: hidden;
+    }
+
+    .nav-scroller .nav {
+      display: flex;
+      flex-wrap: nowrap;
+      padding-bottom: 1rem;
+      margin-top: -1px;
+      overflow-x: auto;
+      text-align: center;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .btn-bd-primary {
+      --bd-violet-bg: #712cf9;
+      --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+
+      --bs-btn-font-weight: 600;
+      --bs-btn-color: var(--bs-white);
+      --bs-btn-bg: var(--bd-violet-bg);
+      --bs-btn-border-color: var(--bd-violet-bg);
+      --bs-btn-hover-color: var(--bs-white);
+      --bs-btn-hover-bg: #6528e0;
+      --bs-btn-hover-border-color: #6528e0;
+      --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+      --bs-btn-active-color: var(--bs-btn-hover-color);
+      --bs-btn-active-bg: #5a23c8;
+      --bs-btn-active-border-color: #5a23c8;
+    }
+
+    .bd-mode-toggle {
+      z-index: 1500;
+    }
+
+    .bd-mode-toggle .dropdown-menu .active .bi {
+      display: block !important;
+    }
+  </style>
+
+    <!-- Custom styles for this template -->
+    <link href="../../static/css/sidebars.css" rel="stylesheet">
+    <link href="../../static/css/pricing.css" rel="stylesheet">
+    <link href="../../static/css/layout.css" rel="stylesheet">
+    <script src="/static/jslib/navbar_tc.js"></script>
+  </head>
+
+  <body>
+    <div id="body">
+      <div id="navbar"></div>
+      <div id="sidebar"></div>
+      <div id="content"
+        style="background-color: #9EDAE3;width: 500px;height: 300px;">
+        <label id="data" style="display: none;">{{code}}</label>
+        <div style="margin-left: 30px;">
+          <h5 class="l_b">Course Edition </h5>
+          <br />
+          <div>
+            <div id="header"><h5><strong>Course
+                  Information</strong></h5></div>
+            <div id="info">
+              <table>
+                <tr><td>Coure Title</td><td>:</td><td><label>{{title}}</label></td></tr>
+                <tr><td>Coure Code</td><td>:</td><td><input type="text"
+                      name="code" id="code" value="{{code}}"></td></tr>
+                <tr><td colspan="3"><button onclick="Reset()" class="btn2">Reset</button>
+                    <button id="btn_s" onclick="Post()" class="btn2">Submit</button>
+                    <button class="btn2"><a href = "/term_tc?term={{term}}">Cancel</a></button</td></tr>
+                </table>
+                {% with messages = get_flashed_messages() %}
+                  {% if messages %}
+                    <ul class=flashes>
+                    {% for message in messages %}
+                      <li>{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                  {% endif %}
+                {% endwith %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <form action="/code_r" method="POST">
+        <input type="text" name="code" id="cur_code" value="{{code}}"
+          style="display: none;" />
+        <input type="text" name="new_code" id="n_code" style="display: none;" />
+        <button id="submit" type="submit" style="display: none;"></button>
+      </form>
+      <script>
+    function Reset(){
+      var code = document.getElementById("data").innerText;
+      document.getElementById("code").value = code;
+    }
+    function Post(){
+      document.getElementById('n_code').value = document.getElementById('code').value;
+      document.getElementById('submit').click();
+    }
+  </script>
+      <script src="../../static/jslib/bootstrap.bundle.min.js"></script>
+
+    </body>
+
+  </html>

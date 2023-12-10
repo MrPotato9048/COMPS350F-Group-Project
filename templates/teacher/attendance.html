@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+
+  <head>
+    <script src="../../static/jslib/color-modes.js"></script>
+    <script src="../../static/jslib/jquery-1.11.1.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content>
+    <meta name="author"
+      content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.118.2">
+    <title>Student Record System - Course Attendance</title>
+
+    <link rel="canonical"
+      href="https://getbootstrap.com/docs/5.3/examples/sidebars/">
+    <link rel="canonical"
+      href="https://getbootstrap.com/docs/5.3/examples/pricing/">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+
+    <link href="../../static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../static/css/layout.css" rel="stylesheet">
+    <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+
+    .b-example-divider {
+      width: 100%;
+      height: 3rm;
+      background-color: rgba(0, 0, 0, .1);
+      border: solid rgba(0, 0, 0, .15);
+      border-width: 1px 0;
+      box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+    }
+
+    .b-example-vr {
+      flex-shrink: 0;
+      width: 1.5rem;
+      height: 100vh;
+    }
+
+    .bi {
+      vertical-align: -.125em;
+      fill: currentColor;
+    }
+
+    .nav-scroller {
+      position: relative;
+      z-index: 2;
+      height: 2.75rem;
+      overflow-y: hidden;
+    }
+
+    .nav-scroller .nav {
+      display: flex;
+      flex-wrap: nowrap;
+      padding-bottom: 1rem;
+      margin-top: -1px;
+      overflow-x: auto;
+      text-align: center;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .btn-bd-primary {
+      --bd-violet-bg: #712cf9;
+      --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+
+      --bs-btn-font-weight: 600;
+      --bs-btn-color: var(--bs-white);
+      --bs-btn-bg: var(--bd-violet-bg);
+      --bs-btn-border-color: var(--bd-violet-bg);
+      --bs-btn-hover-color: var(--bs-white);
+      --bs-btn-hover-bg: #6528e0;
+      --bs-btn-hover-border-color: #6528e0;
+      --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+      --bs-btn-active-color: var(--bs-btn-hover-color);
+      --bs-btn-active-bg: #5a23c8;
+      --bs-btn-active-border-color: #5a23c8;
+    }
+
+    .bd-mode-toggle {
+      z-index: 1500;
+    }
+
+    .bd-mode-toggle .dropdown-menu .active .bi {
+      display: block !important;
+    }
+  </style>
+
+    <!-- Custom styles for this template -->
+    <link href="../../static/css/sidebars.css" rel="stylesheet">
+    <link href="../../static/css/pricing.css" rel="stylesheet">
+    <link href="../../static/css/layout.css" rel="stylesheet">
+    <script src="/static/jslib/navbar_tc.js"></script>
+  </head>
+
+  <body>
+    <div id="body">
+      <div id="navbar"></div>
+      <div id="sidebar"></div>
+      <div id="content"
+        style="float:left;">
+        <div class="center"
+          style="background-color: #9EDAE3;">
+          <div class="left">
+            <table class="l_b">
+              <tr><th colspan="6">Assessment Results</th><th><button id="return"
+                    class="btn2"><a href = "/term_tc?term={{term}}">Return Course List
+                      Page</a></button></th></tr>
+            </table>
+            <table class="acad">
+              <tr><td style="width:20%;">Course Code</td><td>{{code}}</td></tr>
+              <tr><td>Course</td><td>{{course}}</td></tr>
+              <tr><td>Number of Student</td><td>{{studList|length}}</td></tr>
+            </table>
+            <br />
+            <form action="/attd_edit" method="POST">
+              <input type="text" name="code" style="display: none"
+                value="{{code}}" />
+              <input type="text" name="stu_list" id="stu_list"
+                style="display: none" />
+              <input type="text" name="term" value="{{term}}" style="display: none" />
+              <button id="submit" type="submit" style="display: none"></button>
+            </form>
+            <label>Searching:</label><input type="text" id="myInput"
+              onkeyup="Filter()"
+              placeholder="Search by Student ID..." title="Type in a student ID">
+            <button onclick="Change()" id="btn_m" class="btn2">Modify</button><button
+              style="display: none;" id="btn_up" onclick="POST()" class="btn2">Update</button>
+            <button onclick="Cancel()" style="display: none;" id="btn_c" class="btn2">Cancel</button>
+            <div>Course Attendance Status</div>
+            <div>
+              <input type="checkbox" class="home1" aria-disabled="true"
+                checked="checked" disabled><label>-present</label>
+            </div>
+            <div>
+              <input type="checkbox" class="home1" aria-disabled="true"
+                disabled><label>-absent</label>
+            </div>
+            <br>
+            <table class="acad" id="acad1-lecture" style="display: none;">
+              <p id="acad1-lec" style="display: none;">Lecture:</p>
+              <thead>
+                <tr>
+                  <td>Student ID</td>
+                  <td>Name</td>
+                  {% for date in lecDate %}
+                    <td>{{ date }}</td>
+                  {% endfor %}
+                </tr>
+              </thead>
+              <tbody class="stu">
+                {% for student in studList %}
+                  <tr>
+                    <td>{{ student[0] }}</td>
+                    <td>{{ student[1] }}</td>
+                    {% for item in student[2] %}
+                      {% if item %}
+                        <td><input type="checkbox" class="home1" aria-disabled="false" checked="checked"></td>
+                      {% else %}
+                        <td><input type="checkbox" class="home1" aria-disabled="false"></td>
+                      {% endif %}
+                    {% endfor %}
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            <br />
+            <table class="acad" id="acad1-tutorial" style="display: none;">
+              <p id="acad1-tut" style="display: none;">Tutorial:</p>
+              <thead>
+                <tr>
+                  <td>Student ID</td>
+                  <td>Name</td>
+                  {% for date in tutDate %}
+                    <td>{{ date }}</td>
+                  {% endfor %}
+                </tr>
+              </thead>
+              <tbody class="stu">
+                {% for student in studList %}
+                  <tr>
+                    <td>{{ student[0] }}</td>
+                    <td>{{ student[1] }}</td>
+                    {% for item in student[3] %}
+                      {% if item %}
+                        <td><input type="checkbox" class="home1" aria-disabled="false" checked="checked"></td>
+                      {% else %}
+                        <td><input type="checkbox" class="home1" aria-disabled="false"></td>
+                      {% endif %}
+                    {% endfor %}
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            <br />
+            <table class="acad" id="acad2-lecture">
+              <p id="acad2-lec">Lecture:</p>
+              <thead>
+                <tr>
+                  <td>Student ID</td>
+                  <td>Name</td>
+                  {% for date in lecDate %}
+                    <td>{{ date }}</td>
+                  {% endfor %}
+                </tr>
+              </thead>
+              <tbody class="stu2">
+                {% for student in studList %}
+                  <tr>
+                    <td>{{ student[0] }}</td>
+                    <td>{{ student[1] }}</td>
+                    {% for item in student[2] %}
+                      {% if item %}
+                        <td><input type="checkbox" class="home1" aria-disabled="true" checked="checked" disabled></td>
+                      {% else %}
+                        <td><input type="checkbox" class="home1" aria-disabled="true" disabled></td>
+                      {% endif %}
+                    {% endfor %}
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            <br />
+            <table class="acad" id="acad2-tutorial">
+              <p id="acad2-tut">Tutorial:</p>
+              <thead>
+                <tr>
+                  <td>Student ID</td>
+                  <td>Name</td>
+                  {% for date in tutDate %}
+                    <td>{{ date }}</td>
+                  {% endfor %}
+                </tr>
+              </thead>
+              <tbody class="stu2">
+                {% for student in studList %}
+                  <tr>
+                    <td>{{ student[0] }}</td>
+                    <td>{{ student[1] }}</td>
+                    {% for item in student[3] %}
+                      {% if item %}
+                        <td><input type="checkbox" class="home1" aria-disabled="true" checked="checked" disabled></td>
+                      {% else %}
+                        <td><input type="checkbox" class="home1" aria-disabled="true" disabled></td>
+                      {% endif %}
+                    {% endfor %}
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            <br />
+            Attendance Rate:
+            <table class="acad" id="acad">
+              <thead>
+                <tr>
+                  <td>Student ID</td>
+                  <td>Name</td>
+                  <td>Rate (%)</td>
+                </tr>
+              </thead>
+              <tbody class="stu">
+                {% for student in studList %}
+                  <tr>
+                    <td>{{ student[0] }}</td>
+                    <td>{{ student[1] }}</td>
+                    <td>{{ student[4] }}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            <hr />
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="../../static/jslib/bootstrap.bundle.min.js"></script>
+    <script>
+      var offsetHeight = document.getElementById('content').offsetHeight;
+      var new_height = offsetHeight+20;
+      document.getElementById('content').style.height= new_height+"px";
+    </script>
+    <script>
+    var mudi = false;
+    function Filter() {
+      var input, filter, tables, tr, td, i, j, txtValue;
+      input = document.getElementById("myInput");
+      filter = input.value.toUpperCase();
+      tables = document.getElementsByClassName("stu");
+      if (mudi == true) {
+        for (j = 0; j < tables.length; j++) {
+          tr = tables[j].getElementsByTagName("tr");
+          for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+              txtValue = td.textContent || td.innerText;
+              if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+              } else {
+                tr[i].style.display = "none";
+              }
+            }
+          }
+        }
+      } else {
+        tables = document.getElementsByClassName("stu2");
+        for (j = 0; j < tables.length; j++) {
+          tr = tables[j].getElementsByTagName("tr");
+          for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+              txtValue = td.textContent || td.innerText;
+              if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+              } else {
+                tr[i].style.display = "none";
+              }
+            }
+          }
+        }
+      }
+    }
+    function POST() {
+      var tables = ["acad1-lecture", "acad1-tutorial"];
+      var msg = "";
+      var data = {};
+
+      for (var t = 0; t < tables.length; t++) {
+        var table = document.getElementById(tables[t]);
+        var rows = table.rows.length;
+        var columns = table.rows[0].cells.length;
+
+        for (var i = 0; i < rows; i++) {
+          var id = table.rows[i].cells[0].innerHTML;
+          var name = table.rows[i].cells[1].innerHTML;
+          if (!data[id]) {
+            data[id] = [name];
+          }
+          for (var y = 2; y < columns; y++) {
+            var cell = table.rows[i].cells[y];
+            var checkbox = cell.getElementsByTagName("input")[0];
+            if (checkbox) {
+              var checked = checkbox.checked;
+              data[id].push(checked);
+            }
+          }
+        }
+      }
+
+      for (var id in data) {
+        msg += id + "," + data[id].join(",") + ";";
+      }
+
+      document.getElementById('stu_list').value = msg;
+      document.getElementById('submit').click();
+    }
+    </script>
+    <script>
+      function Change(){
+        mudi = true;
+        document.getElementById("btn_m").style.display = "none";
+        document.getElementById("acad2-lecture").style.display = "none";
+        document.getElementById("acad2-lec").style.display = "none";
+        document.getElementById("acad2-tutorial").style.display = "none";
+        document.getElementById("acad2-tut").style.display = "none";
+        document.getElementById("btn_up").style.display = "";
+        document.getElementById("btn_c").style.display = "";
+        document.getElementById("acad1-lecture").style.display = "";
+        document.getElementById("acad1-lec").style.display = "";
+        document.getElementById("acad1-tutorial").style.display = "";
+        document.getElementById("acad1-tut").style.display = "";
+      }
+      function Cancel(){
+        mudi = false;
+        document.getElementById("btn_m").style.display = "";
+        document.getElementById("acad2-lecture").style.display = "";
+        document.getElementById("acad2-lec").style.display = "";
+        document.getElementById("acad2-tutorial").style.display = "";
+        document.getElementById("acad2-tut").style.display = "";
+        document.getElementById("btn_up").style.display = "none";
+        document.getElementById("btn_c").style.display = "none";
+        document.getElementById("acad1-lecture").style.display = "none";
+        document.getElementById("acad1-lec").style.display = "none";
+        document.getElementById("acad1-tutorial").style.display = "none";
+        document.getElementById("acad1-tut").style.display = "none";
+      }
+    </script>
+  </body>
+
+</html>
