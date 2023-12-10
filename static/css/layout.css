@@ -1,0 +1,213 @@
+@media screen and (min-width: 1011px) {
+body{
+    background-image: url("/static/background/background.jpg");
+    display: table;
+    width: 100%;
+}
+#content{
+    display: table-cell;
+}
+#note{
+    float: left;
+    margin-left: 50px;
+    top: 20px;
+    overflow: auto;
+}
+#sidebar{
+    float: left;
+    display: table-cell;
+}
+.acad td{
+    border: 1px solid black;
+    letter-spacing: 1px;
+}
+.colon{
+    width:1%;
+}
+.sd{
+    width: 20%;
+    text-align: justify;
+}
+select{
+    border-radius: 5px;
+}
+.l_b{
+    border-bottom: 2px solid black; 
+}
+
+.btn{
+    border-radius: 5px;
+    background-color: #7DF9FF;
+}
+.btn:hover{
+    border-radius: 5px;
+    background-color: #5F8575;
+}
+.btn:active{
+    border-radius: 5px;
+    background-color: #5F8575;
+}
+.btn2{
+    border-radius: 5px;
+    background-color: #0CE1A5;
+}
+.btn2:hover{
+    border-radius: 5px;
+    background-color: #54A108;
+}
+.btn2:active{
+    border-radius: 5px;
+    background-color: #54A108;
+}
+.subbar{
+    padding-left: 50px;
+    padding-top:10px;
+}
+.nav_btn{
+    display: none;
+}
+.center{
+    margin-left: 100px;
+}
+.left{
+    margin-left: 30px;
+}
+.tt{
+    text-align: left;
+}
+.date{
+    text-align: right;
+}
+.note{
+    width: 100%;
+}
+a{
+    text-decoration: none; 
+    color:black;
+}
+.btn3{
+ border: none;
+ background:none;
+ outline: none;
+}
+#msgDialog{
+    z-index: 99999;
+    position: fixed;
+    min-width: 500px;
+    min-height:400px;
+}
+#index{
+    display: none;
+    position: fixed;
+    z-index: 99999;
+    margin-left: -125px;
+    background-color: rgb(0, 0, 0,0.7);
+}
+.width{
+    width: 50px;
+}
+#up_asm,#btn_mc,#c_atd{
+    width: 100px;
+}
+#c_atd{
+    height:75px;
+}
+}
+@media screen and (max-width: 1010px) {
+    body{
+        background-image: url("/static/background/background.jpg");
+        display: table;
+        width: 100%;
+    }
+    #content{
+        display: table-cell;
+    }
+    #sidebar{
+        display: table-cell;
+    }
+    .acad td{
+        border: 1px solid black;
+        letter-spacing: 1px;
+    }
+    .colon{
+        width:1%;
+    }
+    .sd{
+        width: 20%;
+        text-align: justify;
+    }
+    select{
+        border-radius: 5px;
+    }
+    .l_b{
+        border-bottom: 2px solid black; 
+    }
+    
+    .btn{
+        border-radius: 5px;
+        background-color: #7DF9FF;
+    }
+    .btn:hover{
+        border-radius: 5px;
+        background-color: #5F8575;
+    }
+    .btn:active{
+        border-radius: 5px;
+        background-color: #5F8575;
+    }
+    .btn2{
+        border-radius: 5px;
+        background-color: #0CE1A5;
+    }
+    .btn2:hover{
+        border-radius: 5px;
+        background-color: #54A108;
+    }
+    .btn2:active{
+        border-radius: 5px;
+        background-color: #54A108;
+    }
+    .subbar{
+        padding-left: 50px;
+        padding-top:10px;
+    }
+    .nav_btn{
+        display: none;
+    }
+    .center{
+        margin-left: 100px;
+    }
+    .left{
+        margin-left: 30px;
+    }
+    .tt{
+        text-align: left;
+    }
+    .date{
+        text-align: right;
+    }
+    .note{
+        width: 100%;
+    }
+    .btn3{
+     border: none;
+     background:none;
+     outline: none;
+    }
+    #msgDialog{
+        z-index: 99999;
+        position: fixed;
+        min-width: 500px;
+        min-height:400px;
+    }
+    #index{
+        display: none;
+        position: fixed;
+        z-index: 99999;
+        margin-left: -125px;
+        background-color: rgb(0, 0, 0,0.7);
+    }
+    .width{
+        width: 50px;
+    }
+}
